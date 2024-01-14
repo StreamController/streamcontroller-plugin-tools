@@ -24,5 +24,6 @@ setup(
             "Operating System :: Unix",
             "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
             "Natural Language :: English"
-        ]
+        ],
+        url="https://github.com/Core447/streamcontroller-plugin-tools",
 )
