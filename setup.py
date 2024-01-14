@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.3' 
+VERSION = '0.0.4' 
 DESCRIPTION = 'Base for StreamController plugins'
 LONG_DESCRIPTION = 'This package contains the base for StreamController plugins.'
 
