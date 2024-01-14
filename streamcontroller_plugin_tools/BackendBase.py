@@ -27,9 +27,8 @@ class BackendBase:
     def get_args(self):
         parser = argparse.ArgumentParser(prog="BackendBase")
         parser.add_argument("--uri", type=str)
-        parser.add_argument("--backend_base_path", type=str)
         args = parser.parse_args()
-        if args.uri is None or args.backend_base_path is None:
+        if args.uri is None:
             parser.print_help()
             exit()
         return args
