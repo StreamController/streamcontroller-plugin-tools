@@ -17,7 +17,7 @@ setup(
         install_requires=["Pyro5", "loguru"],
         keywords=['python', 'StreamController', "plugin"],
         classifiers= [
-            "Development Status :: 3 - Beta",
+            "Development Status :: 4 - Beta",
             "Environment :: Plugins",
             "Intended Audience :: Developers",
             "Programming Language :: Python :: 3 :: Only",
