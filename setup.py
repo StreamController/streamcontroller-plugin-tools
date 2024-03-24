@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '1.0.3'
+VERSION = '1.0.5'
 DESCRIPTION = 'Base for StreamController plugins'
 LONG_DESCRIPTION = 'This package contains the base for StreamController plugins.'
 
@@ -17,7 +17,7 @@ setup(
         install_requires=["Pyro5", "loguru"],
         keywords=['python', 'StreamController', "plugin"],
         classifiers= [
-            "Development Status :: 3 - Alpha",
+            "Development Status :: 3 - Beta",
             "Environment :: Plugins",
             "Intended Audience :: Developers",
             "Programming Language :: Python :: 3 :: Only",
@@ -25,5 +25,5 @@ setup(
             "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
             "Natural Language :: English"
         ],
-        url="https://github.com/Core447/streamcontroller-plugin-tools",
+        url="https://github.com/StreamController/streamcontroller-plugin-tools",
 )

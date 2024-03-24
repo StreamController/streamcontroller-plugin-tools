@@ -6,21 +6,35 @@ import sys
 import os
 from loguru import logger as log
 
+log.remove(0)
 log.add(sys.stderr, level="TRACE")
 
 @Pyro5.api.expose
 class BackendBase:
     def __init__(self):
         self.daemon:Pyro5.api.Daemon = None
+        log.trace("Init Pyro...")
         self.init_pyro5()
+        log.trace("Pyro init done")
 
         self._frontend:Pyro5.api.Proxy = None
         self.connect_to_frontend()
+        log.trace("Connected to frontend")
         self.register_to_frontend()
+        log.trace("Registered to frontend")
 
-        threading.Thread(target=self.ping_thread, daemon=True).start()
+        self.ping = True
+        threading.Thread(target=self.ping_thread, daemon=True, name="ping_thread").start()
+        log.trace("Ping thread started")
 
-        self.daemon.requestLoop()
+        self.loop = True
+        self.request_loop_thread = threading.Thread(
+            target=self.daemon.requestLoop,
+            kwargs={"loopCondition": lambda: self.loop}
+        )
+
+        self.request_loop_thread.start()
+        log.trace("Request loop thread started")
 
     def connect_to_frontend(self):
         args = self.get_args()
@@ -56,7 +70,7 @@ class BackendBase:
         self._frontend = value
     
     def ping_thread(self):
-        while True:
+        while self.ping:
             time.sleep(5)
             try:
                 self.frontend.ping()
@@ -67,6 +81,16 @@ class BackendBase:
                 return
 
     def on_connection_lost(self):
+        self.loop = False
+        self.ping = False
         log.info("on_connection_lost triggered")
+        # join all threads
+        self.daemon.shutdown()
+        log.trace("shutdown daemon done")
         self.daemon.close()
+        log.trace("close daemon done")
+        # for t in threading.enumerate():
+            # if t is not threading.current_thread():
+                # t.join()
+        log.success("Backend stopped. Have a nice day!")
         sys.exit(0)
