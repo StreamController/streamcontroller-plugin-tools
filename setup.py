@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '1.0.5'
+VERSION = '2.0.0'
 DESCRIPTION = 'Base for StreamController plugins'
 LONG_DESCRIPTION = 'This package contains the base for StreamController plugins.'
 
@@ -14,7 +14,7 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=["Pyro5", "loguru"],
+        install_requires=["rpyc", "loguru"],
         keywords=['python', 'StreamController', "plugin"],
         classifiers= [
             "Development Status :: 4 - Beta",
