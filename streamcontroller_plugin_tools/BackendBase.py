@@ -23,7 +23,7 @@ class BackendBase(rpyc.Service):
 
     def connect_to_frontend(self):
         port = self.get_args().port
-        self.frontend_connection = rpyc.connect("localhost", port)
+        self.frontend_connection = rpyc.connect("localhost", port, config={"allow_public_attrs": True})
         self.frontend = self.frontend_connection.root
 
     def start_server(self):
